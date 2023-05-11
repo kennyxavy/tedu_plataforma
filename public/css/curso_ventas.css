@@ -1,0 +1,391 @@
+/*===============Propiedades Globales================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+:root {
+    --brand: #f11717;
+    --dark: #092032;
+    --body: #516171;
+    --border: rgba(0, 0, 0, 0.08);
+    --shadow: 0px 6px 30px rgba(0, 0, 0, 0.08);
+
+}
+
+/*===================MENU==========================*/
+
+#menu a,
+button {
+    font-size: 18px !important;
+    font-weight: 600;
+
+}
+
+#menu a {
+    color: var(--dark);
+
+}
+
+/* navbar */
+.top-nav {
+    background-color: var(--brand);
+    color: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.top-nav p {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.top-nav span,
+.top-nav i {
+    vertical-align: middle;
+}
+
+.navbar {
+    box-shadow: var(--shadow);
+}
+
+.social-icons a {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+}
+
+.social-icons a:hover {
+    background-color: #fff;
+    color: var(--brand);
+}
+
+.navbar .navbar-nav .nav-link {
+    color: var(--dark);
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    color: var(--brand);
+}
+
+.navbar .navbar-nav .nav-link.active {
+    color: var(--brand);
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.navbar-brand .dot {
+    color: var(--brand);
+}
+
+
+/*=========================CONTACTOS BACKGROUND================================*/
+
+#bg-contactos {
+    position: relative;
+    /* top: -130px; */
+}
+
+#seccion-contacto {
+    background-color: var(--brand);
+    min-height: 500px;
+    position: relative;
+}
+
+/* pronto */
+.countdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 60px 40px;
+}
+
+.soon-title {
+    text-align: center;
+    margin: 50px auto 50px auto;
+    padding: 20px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 90px;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    box-shadow: 24px 24px 48px #bcbcbc,
+        -24px -24px 48px #ffffff;
+}
+
+.simply-section {
+    background: #65338d;
+    width: 180px;
+    height: 180px;
+    margin: 20px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 29px;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    box-shadow: 24px 24px 48px #bcbcbc,
+        -24px -24px 48px #ffffff;
+}
+
+.simply-amount {
+    display: block;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    color: #111;
+}
+
+.simply-word {
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+    color: #111;
+
+}
+
+/*=========================FOOTER================================*/
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.9);
+}
+
+.footer_div {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    min-height: 100px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer_div .social_icon,
+.footer_div .menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+
+footer .footer_div h2 {
+    color: var(--dark);
+}
+
+.footer_div .social_icon li,
+.footer_div .menu li {
+    list-style: none;
+}
+
+.footer_div .social_icon li i {
+    font-size: 2.5em;
+    color: var(--dark);
+    margin: 0 10px;
+    display: inline-block;
+    transition: .5s;
+}
+
+.footer_div .social_icon li i:hover {
+    transform: translateY(-10px);
+    color: var(--brand);
+}
+
+.footer_div .menu li a {
+    font-size: 1em;
+    color: var(--dark);
+    margin: 0 10px;
+    display: inline-block;
+    transition: .3s;
+    text-decoration: none;
+    opacity: 0.75;
+    line-height: 2.5em;
+}
+
+
+.footer_div .menu li a:hover {
+    opacity: 1;
+    transform: translateY(-10px);
+    color: var(--brand);
+}
+
+.footer_div .menu li a i {
+    font-size: 2em;
+    color: var(--dark);
+    margin: 0 10px;
+    display: inline-block;
+    transition: .3s;
+}
+
+.footer_div .menu li a i:hover {
+    transform: translateY(-10px);
+    color: var(--brand);
+}
+
+footer .footer_div p {
+    color: var(--dark);
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+footer .terminos {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.copyrightText {
+    padding: 8px 40px;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    text-align: center;
+}
+
+.copyrightText p {
+    color: var(--dark);
+}
+
+.copyrightText a {
+    color: var(--brand);
+    text-decoration: none;
+}
+
+footer .footer_div h2 {
+    color: #fff;
+}
+
+/*=========================MEDIA QUERIES PANTALLA ANCHA================================*/
+
+@media (max-width:1200px) {
+
+    #intro,
+    #equipo {
+        width: 90% !important;
+        margin: auto;
+    }
+
+    #local {
+        flex-wrap: wrap;
+        padding-top: 30px;
+    }
+
+    .wrapper-local {
+        width: 90%;
+        margin: auto;
+        padding-top: 50px;
+    }
+
+}
+
+/*=========================MEDIA QUERIES PANTALLA SM================================*/
+
+
+@media (max-width:768px) {
+
+    #intro,
+    #equipo {
+        width: 90% !important;
+        margin: auto;
+    }
+
+
+    #img-equipo {
+        max-height: 20rem !important;
+        width: 90%;
+    }
+
+    .wrapper-local {
+        width: 90%;
+        margin: auto;
+        padding-top: 50px;
+    }
+
+    #local {
+        flex-wrap: wrap;
+        padding-top: 30px;
+
+    }
+
+
+
+}
+
+/*=========================MEDIA QUERIES PANTALLA EXTRA-SM================================*/
+
+@media (max-width: 393px) {
+    #servicios-fila-2 {
+        width: 100% !important;
+    }
+
+    #servicios-fila-1 {
+        width: 100% !important;
+    }
+
+    .icono-wrap {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        text-align: center;
+    }
+
+    #local {
+
+        display: flex;
+        padding-top: 90px;
+
+    }
+
+}
+
+/*========= WHATSAPP BUTTON =======*/
+.wsp-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.btn_wsp {
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    bottom: 30px;
+    background: #0df053;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    z-index: 100;
+    box-shadow: -1px 6px 14px 0px rgba(0, 0, 0, 0.75);
+    transition: .3s;
+}
+
+.btn_wsp:hover {
+    background: #fff;
+    color: #0df053;
+    transform: translateY(-10px);
+}
