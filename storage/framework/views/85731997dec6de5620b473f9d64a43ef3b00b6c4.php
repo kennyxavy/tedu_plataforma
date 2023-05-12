@@ -24,8 +24,8 @@
                 
                 <th>No.</th>
                 <th>Fecha</th>
-                <th>Nombre de Banco</th>
-                <th>Tipo de Cuenta</th>
+                <th>Nombre de Banco y Tipo de Cuenta</th>
+                
                 <th>Número de Cuenta </th>
                 <th>Cantidad</th>
                 <th>Estado</th>
@@ -41,8 +41,8 @@
                 <tr>
                     <td><?php echo e($item->id); ?></td>
                     <td><?php echo e($item->fecha); ?></td>
-                    <td><?php echo e($item->banco_benificiario); ?></td>
-                    <td><?php echo e($item->tipo_cta); ?></td>
+                    <td><?php echo e($item->banco_benificiario . ' ' . $item->tipo_cta); ?></td>
+                    
                     <td><?php echo e($item->num_cta_bancaria); ?></td>
                     <td><?php echo e($item->cantidad); ?></td>
                     <?php if($item->aprobado == 1): ?>

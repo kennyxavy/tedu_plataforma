@@ -52,6 +52,7 @@
                             <h4>Saldo Actual: $ {{ session('saldoCuenta') }}</h4>
                             <br>
                             <label for="cantidad">Datos de Cuenta Bancaria</label>
+
                             <div class="col-sm-10">
                                 {!! $errors->first('banco_benificiario', '<span class="help-block text-danger">:message</span>') !!}
                                 <div class="input-group mb-3">
@@ -61,6 +62,7 @@
                                     <input type="text" class="form-control" id="banco_benificiario"
                                         name="banco_benificiario" value="{{ old('banco_benificiario') }}"
                                         placeholder="Nombre de Banco" maxlength="100" required>
+
                                 </div>
                             </div>
                             <div class="col-sm-10">

@@ -10,8 +10,7 @@ class SolicitudRecarga extends Model
     use HasFactory;
     protected $table = 'solicitud_recargas';
     protected $primaryKey = 'id';
-
     protected $fillable = [
-        'id','user_id','fecha','valor','rutaarchivo','detalle','aprobado','aprobadopor','aprobadodate','bancoprocedencia'
+        'id', 'user_id', 'fecha', 'valor', 'rutaarchivo', 'detalle', 'aprobado', 'aprobadopor', 'aprobadodate', 'bancoprocedencia'
     ];
 }

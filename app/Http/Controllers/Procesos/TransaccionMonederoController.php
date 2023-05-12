@@ -208,9 +208,8 @@ class TransaccionMonederoController extends Controller
 
     public function retirosaprobar()
     {
-        $sql = "select re.id,re.fecha,re.saldo,re.banco_benificiario,re.tipo_cta,re.num_cta_bancaria,re.cantidad,re.aprobado,re.rutaarchivo,usu.name solicitante,usu.dni from solicitud_retiros re
-        LEFT JOIN users usu ON usu.id=re.user_id";
-        // $sql = "select re.id,re.fecha,re.cantidad,re.transferido,usu.name solicitante,usu.dni from solicitud_retiros re
+        $sql = "select re.id,re.fecha,re.cantidad,re.banco_benificiario,re.tipo_cta,re.num_cta_bancaria,re.rutaarchivo,re.saldo,re.transferido,re.aprobado,usu.dni,usu.name solicitante,re.rutaarchivo,usu.name solicitante,usu.dni from solicitud_retiros re LEFT JOIN users usu ON usu.id=re.user_id";
+        // $sql = "select re.id,re.fecha,re.cantidad,re.detalle,re.transferido,usu.name solicitante,usu.dni from solicitud_retiros re
         // LEFT JOIN users usu ON usu.id=re.user_id";
         $datos = DB::select($sql);
 
@@ -245,7 +244,18 @@ class TransaccionMonederoController extends Controller
             'aprobadodate'   => $date,
 
         ]);
-        $request->session()->flash('alert-success', 'Fue aprobado exitosamente!');
+		$file = $request->file('archivo');
+        $extension = $file->getClientOriginalExtension();
+
+        $namecf = $registro->id . "." . $extension;
+        //indicamos que queremos guardar un nuevo archivo en el disco local
+        \Storage::disk('banco')->put($namecf,  \File::get($file));
+
+        $registro = SolicitudRecarga::where('id', '=', $registro->id)->update([
+            'rutaarchivo'    => $namecf
+        ]);
+
+        $request->session()->flash('alert-success', 'Fue agregado exitosamente!');
         return back();
     }
 

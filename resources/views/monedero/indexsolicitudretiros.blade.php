@@ -28,8 +28,8 @@
       <th>Estado</th> --}}
                 <th>No.</th>
                 <th>Fecha</th>
-                <th>Nombre de Banco</th>
-                <th>Tipo de Cuenta</th>
+                <th>Nombre de Banco y Tipo de Cuenta</th>
+                {{-- <th>Tipo de Cuenta</th> --}}
                 <th>Número de Cuenta </th>
                 <th>Cantidad</th>
                 <th>Estado</th>
@@ -60,8 +60,9 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->fecha }}</td>
-                    <td>{{ $item->banco_benificiario }}</td>
-                    <td>{{ $item->tipo_cta }}</td>
+                    <td>{{ $item->banco_benificiario . ' ' . $item->tipo_cta }}</td>
+                    {{-- <td>{{ $item->banco_benificiario }}</td>
+                    <td>{{ $item->tipo_cta }}</td> --}}
                     <td>{{ $item->num_cta_bancaria }}</td>
                     <td>{{ $item->cantidad }}</td>
                     @if ($item->aprobado == 1)

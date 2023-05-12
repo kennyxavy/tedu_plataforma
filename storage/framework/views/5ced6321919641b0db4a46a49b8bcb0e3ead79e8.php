@@ -51,6 +51,7 @@
                             <h4>Saldo Actual: $ <?php echo e(session('saldoCuenta')); ?></h4>
                             <br>
                             <label for="cantidad">Datos de Cuenta Bancaria</label>
+
                             <div class="col-sm-10">
                                 <?php echo $errors->first('banco_benificiario', '<span class="help-block text-danger">:message</span>'); ?>
 
@@ -61,6 +62,7 @@
                                     <input type="text" class="form-control" id="banco_benificiario"
                                         name="banco_benificiario" value="<?php echo e(old('banco_benificiario')); ?>"
                                         placeholder="Nombre de Banco" maxlength="100" required>
+
                                 </div>
                             </div>
                             <div class="col-sm-10">
