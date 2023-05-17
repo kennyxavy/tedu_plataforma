@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Procesos;
 
 use App\Http\Controllers\Controller;
 use App\Models\SolicitudRecarga;
-use App\Models\SolicitudRetiro;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\TransaccionMonedero;
+use App\Models\SolicitudRetiro;
 use App\Models\User;
 
 class TransaccionMonederoController extends Controller
@@ -52,11 +52,9 @@ class TransaccionMonederoController extends Controller
     public function indexsolicitudretiro()
     {
 
-        // $sql = "SELECT * FROM solicitud_retiros sol
-        // WHERE sol.user_id=" . Auth()->user()->id;
-        // $datos = DB::select($sql);
-
-        $sql = "SELECT sol.id,sol.user_id,sol.fecha,sol.valor,sol.rutaarchivo,sol.banco_benificiario,sol.tipo_cta,sol.num_cta_bancaria,sol.aprobado,sol.saldo,sol.transferido,tra.id transaccionid FROM solicitud_retiros sol
+        // $sql="SELECT * FROM solicitud_retiros sol
+        // WHERE sol.user_id=".Auth()->user()->id;
+        $sql = "SELECT sol.id,sol.user_id,sol.fecha,sol.cantidad,sol.rutaarchivo,sol.banco_benificiario,sol.tipo_cta,sol.aprobado,sol.num_cta_bancaria,sol.transferido,tra.id transaccionid FROM solicitud_retiros sol
         LEFT JOIN transaccion_monedero tra on tra.solicitud_id=sol.id
         WHERE sol.user_id=" . Auth()->user()->id;
         $datos = DB::select($sql);
@@ -101,12 +99,12 @@ class TransaccionMonederoController extends Controller
         return back();
     }
 
+
     public function aprobar()
     {
 
-        $sql = "select re.id,re.fecha,re.valor,re.detalle,re.bancoprocedencia,re.aprobado,re.rutaarchivo,usu.name solicitante,usu.dni,usu.micodigo from solicitud_recargas re
-        LEFT JOIN users usu ON usu.id=re.user_id
-        ";
+        $sql = "select re.id,re.fecha,re.valor,re.detalle,re.bancoprocedencia,re.aprobado,re.rutaarchivo,usu.name solicitante,usu.dni from solicitud_recargas re
+        LEFT JOIN users usu ON usu.id=re.user_id";
         $datos = DB::select($sql);
 
         return view('monedero.aprobar', compact('datos'));
@@ -123,25 +121,28 @@ class TransaccionMonederoController extends Controller
         //registro de gasto
         $registro3 = TransaccionMonedero::create([
             'user_id'        => $datos->user_id,
-            'tipo'           => 'ING',
-            'fecha'          => $date,
-            'valor'          => $datos->valor,
-            'detalle'        => 'Por recarga desde la solicitud No. ' . $id . ', aprobada por TEDU EMPRENDE.',
-            'observacion'    => '',
-            'solicitud_id'   => $id,
+            'tipo'        => 'ING',
+            'fecha'        => $date,
+            'valor'        => $datos->valor,
+            'detalle' => 'Por recarga desde la solicitud No. ' . $id . ', aprobada por TEDU EMPRENDE.',
+            'observacion' => '',
+            'solicitud_id' => $id,
         ]);
         $misaldo = $this->obtenersaldo();
         session(['saldoCuenta' => $misaldo[0]->saldo]);
 
         $registro = SolicitudRecarga::where('id', '=',  $id)->update([
             'aprobado'        => 1,
-            'aprobadopor'     => Auth()->user()->id,
-            'aprobadodate'    => $date,
+            'aprobadopor'        => Auth()->user()->id,
+            'aprobadodate'        => $date,
 
         ]);
+
+
         $request->session()->flash('alert-success', 'Fue aprobado exitosamente!');
         return back();
     }
+
 
     public function obtenersaldo()
     {
@@ -150,25 +151,31 @@ class TransaccionMonederoController extends Controller
         return $saldo;
     }
 
-
     public function solicitudretiro(Request $request)
     {
-         $carbon = new \Carbon\Carbon();
+        $carbon = new \Carbon\Carbon();
         $date = $carbon->now();
 
         $datos = $request->all();
+        $misaldo = $this->obtenersaldo();
+
+
+        if ($datos['cantidad'] > $misaldo[0]->saldo) {
+            $request->session()->flash('alert-danger', 'Su saldo de $ ' . $misaldo[0]->saldo . ' no es suficiente como para realizar un retiro de la cuenta virtual.');
+            return back();
+        }
 
         $registro = SolicitudRetiro::create([
-            'user_id'               => Auth()->user()->id,
-            'fecha'                 => $date,
-            'banco_beneficiario'    => $datos['banco'],
-            'tipo_cta'              => $datos['tipocta'],
-            'num_cta_bancaria'      => $datos['numcuenta'],
-            'valor'                 => $datos['valor'],
-            'aprobado'              => 0,
+            'user_id'            => Auth()->user()->id,
+            'fecha'              => $date,
+            'saldo'          =>  $datos['saldo'],
+            'banco_benificiario' => $datos['banco_benificiario'],
+            'tipo_cta'           => $datos['tipo_cta'],
+            'num_cta_bancaria'   => $datos['num_cta_bancaria'],
+            'cantidad'           => $datos['cantidad'],
+            'transferido'        => 0,
 
         ]);
-
         $file = $request->file('archivo');
         $extension = $file->getClientOriginalExtension();
 
@@ -176,17 +183,18 @@ class TransaccionMonederoController extends Controller
         //indicamos que queremos guardar un nuevo archivo en el disco local
         \Storage::disk('banco')->put($namecf,  \File::get($file));
 
-        $registro = SolicitudRetiro::where('id', '=', $registro->id)->update([
+        $registro = SolicitudRecarga::where('id', '=', $registro->id)->update([
             'rutaarchivo'    => $namecf
         ]);
 
         $request->session()->flash('alert-success', 'Fue agregado exitosamente!');
         return back();
     }
+
     public function retirosaprobar()
     {
 
-        $sql = "select re.id,re.fecha,re.valor,re.transferido,usu.name solicitante,usu.dni,usu.micodigo from solicitud_retiros re
+        $sql = "select re.id,re.fecha,re.cantidad,re.transferido,usu.name solicitante,usu.dni from solicitud_retiros re
         LEFT JOIN users usu ON usu.id=re.user_id";
         $datos = DB::select($sql);
 
@@ -204,21 +212,21 @@ class TransaccionMonederoController extends Controller
         //registro de gasto
         $registro3 = TransaccionMonedero::create([
             'user_id'        => $datos->user_id,
-            'tipo'           => 'EGR',
-            'fecha'          => $date,
-            'valor'          => $datos->valor,
+            'tipo'        => 'EGR',
+            'fecha'        => $date,
+            'valor'        => $datos->cantidad,
             'detalle' => 'Por retiro desde la solicitud No. ' . $id . ', transferido por TEDU EMPRENDE.',
-            'observacion'    => '',
-            'solicitud_id'   => $id,
+            'observacion' => '',
+            'solicitud_id' => $id,
         ]);
         $misaldo = $this->obtenersaldo();
         session(['saldoCuenta' => $misaldo[0]->saldo]);
 
         $registro = SolicitudRetiro::where('id', '=',  $id)->update([
             'transferido'        => 1,
-            'aprobado'           => 1,
+            'aprobado'        => 1,
             'aprobadopor'        => Auth()->user()->id,
-            'aprobadodate'       => $date,
+            'aprobadodate'        => $date,
 
         ]);
         $request->session()->flash('alert-success', 'Fue aprobado exitosamente!');
@@ -261,7 +269,7 @@ class TransaccionMonederoController extends Controller
             return view("auth.login");
         }
 
-        // $sql="select re.id,re.fecha,re.valor,re.transferido,usu.name solicitante,usu.dni from solicitud_retiros re
+        // $sql="select re.id,re.fecha,re.cantidad,re.transferido,usu.name solicitante,usu.dni from solicitud_retiros re
         // LEFT JOIN users usu ON usu.id=re.user_id";
         $sql = "select * from transaccion_monedero where tipo='PRO'";
         $datos = DB::select($sql);
@@ -328,15 +336,15 @@ class TransaccionMonederoController extends Controller
                 $datos = DB::select($sql1)[0];
                 $registro3 = TransaccionMonedero::create([
                     'user_id'        => $datos->id,
-                    'tipo'           => 'PRO',
-                    'fecha'          => $date,
-                    'valor'          => intval($obj["amount"]),
-                    'detalle'        => 'Update a PRO, aprobada por TEDU EMPRENDE.',
-                    'observacion'    => '',
-                    'solicitud_id'   => null,
+                    'tipo'        => 'PRO',
+                    'fecha'        => $date,
+                    'valor'        => intval($obj["amount"]),
+                    'detalle' => 'Update a PRO, aprobada por TEDU EMPRENDE.',
+                    'observacion' => '',
+                    'solicitud_id' => null,
                 ]);
                 $actualizar = User::where('id', '=',  $datos->id)->update([
-                    'plan_id'         => 2,
+                    'plan_id'           => 2,
                 ]);
 
                 //INICIO DE DOCUMENTOS CONTIFICO
@@ -377,7 +385,7 @@ class TransaccionMonederoController extends Controller
                         "detalles" => [
                             [
                                 "producto_id" => "GP9aQ6GDmFO3EbDM",
-                                "valor" => 1.0,
+                                "cantidad" => 1.0,
                                 "precio" => 22.32,
                                 "porcentaje_iva" => 12,
                                 "porcentaje_descuento" => 0.00,

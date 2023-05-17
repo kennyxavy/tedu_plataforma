@@ -2,7 +2,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('titulo'); ?>
     <a href="<?php echo e(route('home')); ?>" class="btn btn-primary pull-right"><i class="fa fa-undo"></i> Regresar</a>
-    Aprobar solicitudes de retiros por aprobar
+    Solicitudes de retiros por aprobar
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('contenedor'); ?>
@@ -20,10 +20,9 @@
                 <th>No.</th>
                 <th>Fecha</th>
                 <th>DNI</th>
-                <th>Solicita</th>
-                <th>Detalle</th>
-                <th>Valor</th>
-                <th>Banco</th>
+                <th>Codigo</th>
+                <th>Solicitante</th>
+                <th>Cantidad solicitada</th>
                 <th>Estado</th>
                 <th>Archivo</th>
                 <th>Aprobar</th>
@@ -36,20 +35,21 @@
                     <td><?php echo e($item->id); ?></td>
                     <td><?php echo e($item->fecha); ?></td>
                     <td><?php echo e($item->dni); ?></td>
+                    <td><?php echo e($item->micodigo); ?></td>
                     <td><?php echo e($item->solicitante); ?></td>
-                    <td><?php echo e($item->cantidad); ?></td>
-                    <td><?php echo e($item->banco_benificiario); ?></td>
+                    <td><?php echo e($item->valor); ?></td>
                     <?php if($item->aprobado == 1): ?>
                         <td><span class='badge badge-success'>Aprobado</span></td>
                     <?php else: ?>
                         <td><span class='badge badge-warning'>Pendiente</span></td>
                     <?php endif; ?>
+
                     <td><a href="<?php echo e(url('archivo_banco/' . $item->rutaarchivo)); ?>" class="btn btn-warning pull-center"
                             target="_blank"><i class="fa fa-download"></i> </a></td>
                     <?php if($item->aprobado == 1): ?>
                         <td></td>
                     <?php else: ?>
-                        <td><a href="<?php echo e(url('recargas/aprobarsol/' . Crypt::encrypt($item->id))); ?>"
+                        <td><a href="<?php echo e(url('retiros/aprobarsol/' . Crypt::encrypt($item->id))); ?>"
                                 class="btn btn-info pull-center"><i class="fa fa-check-square"></i> </a></td>
                     <?php endif; ?>
                 </tr>

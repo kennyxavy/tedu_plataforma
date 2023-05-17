@@ -3,7 +3,7 @@
 @endsection
 @section('titulo')
     <a href="{{ route('home') }}" class="btn btn-primary pull-right"><i class="fa fa-undo"></i> Regresar</a>
-    Solicitudes de recargas por aprobar
+    Aprobar solicitudes de retiros por aprobar
 @endsection
 
 @section('contenedor')
@@ -21,7 +21,6 @@
                 <th>No.</th>
                 <th>Fecha</th>
                 <th>DNI</th>
-                <th>Codigo</th>
                 <th>Solicita</th>
                 <th>Detalle</th>
                 <th>Valor</th>
@@ -38,17 +37,14 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->fecha }}</td>
                     <td>{{ $item->dni }}</td>
-                    <td>{{ $item->micodigo }}</td>
                     <td>{{ $item->solicitante }}</td>
-                    <td>{{ $item->detalle }}</td>
-                    <td>{{ $item->valor }}</td>
-                    <td>{{ $item->bancoprocedencia }}</td>
+                    <td>{{ $item->cantidad }}</td>
+                    <td>{{ $item->banco_benificiario }}</td>
                     @if ($item->aprobado == 1)
                         <td><span class='badge badge-success'>Aprobado</span></td>
                     @else
                         <td><span class='badge badge-warning'>Pendiente</span></td>
                     @endif
-
                     <td><a href="{{ url('archivo_banco/' . $item->rutaarchivo) }}" class="btn btn-warning pull-center"
                             target="_blank"><i class="fa fa-download"></i> </a></td>
                     @if ($item->aprobado == 1)

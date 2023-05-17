@@ -2,14 +2,10 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('titulo'); ?>
     <a href="<?php echo e(route('home')); ?>" class="btn btn-primary pull-right"><i class="fa fa-undo"></i> Regresar</a>
-    Mis solicitudes de recargas
+    Aprobar solicitudes de retiros por aprobar
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('contenedor'); ?>
-    <div>
-        <a href="<?php echo e(route('recargas.crear')); ?>" class="btn btn-success float-right"><i class="fas fa-plus-circle"></i>
-            Añadir</a>
-    </div>
     <div class="flash-message">
         <?php $__currentLoopData = ['danger', 'warning', 'success', 'info']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php if(Session::has('alert-' . $msg)): ?>
@@ -23,12 +19,14 @@
             <tr>
                 <th>No.</th>
                 <th>Fecha</th>
+                <th>DNI</th>
+                <th>Solicita</th>
                 <th>Detalle</th>
                 <th>Valor</th>
                 <th>Banco</th>
                 <th>Estado</th>
                 <th>Archivo</th>
-                <th>Transacción ING</th>
+                <th>Aprobar</th>
             </tr>
         </thead>
         <tbody>
@@ -37,9 +35,10 @@
                 <tr>
                     <td><?php echo e($item->id); ?></td>
                     <td><?php echo e($item->fecha); ?></td>
-                    <td><?php echo e($item->detalle); ?></td>
-                    <td><?php echo e($item->valor); ?></td>
-                    <td><?php echo e($item->bancoprocedencia); ?></td>
+                    <td><?php echo e($item->dni); ?></td>
+                    <td><?php echo e($item->solicitante); ?></td>
+                    <td><?php echo e($item->cantidad); ?></td>
+                    <td><?php echo e($item->banco_benificiario); ?></td>
                     <?php if($item->aprobado == 1): ?>
                         <td><span class='badge badge-success'>Aprobado</span></td>
                     <?php else: ?>
@@ -47,7 +46,12 @@
                     <?php endif; ?>
                     <td><a href="<?php echo e(url('archivo_banco/' . $item->rutaarchivo)); ?>" class="btn btn-warning pull-center"
                             target="_blank"><i class="fa fa-download"></i> </a></td>
-                    <td><?php echo e($item->transaccionid); ?></td>
+                    <?php if($item->aprobado == 1): ?>
+                        <td></td>
+                    <?php else: ?>
+                        <td><a href="<?php echo e(url('recargas/aprobarsol/' . Crypt::encrypt($item->id))); ?>"
+                                class="btn btn-info pull-center"><i class="fa fa-check-square"></i> </a></td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -55,4 +59,4 @@
     </table>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('themes/lte/layaout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\teduprincipal - proyecto_pruebas\resources\views/monedero/indexsolicitudrecarga.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('themes/lte/layaout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\teduprincipal - proyecto_pruebas\resources\views\monedero\aprobarretiroACTUALIZACION.blade.php ENDPATH**/ ?>

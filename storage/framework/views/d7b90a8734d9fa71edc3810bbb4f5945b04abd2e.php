@@ -60,4 +60,4 @@
     </table>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('themes/lte/layaout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\teduprincipal - proyecto_pruebas\resources\views/monedero/indexsolicitudretiros.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('themes/lte/layaout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\teduprincipal - proyecto_pruebas\resources\views\monedero\indexsolicitudretirosACTUALIZACION.blade.php ENDPATH**/ ?>

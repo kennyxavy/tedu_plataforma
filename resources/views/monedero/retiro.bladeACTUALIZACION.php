@@ -1,18 +1,19 @@
-<?php $__env->startSection('otrolink'); ?>
-<?php $__env->stopSection(); ?>
-<?php $__env->startSection('titulo'); ?>
-    <a href="<?php echo e(route('home')); ?>" class="btn btn-primary pull-right"><i class="fa fa-undo"></i> Regresar</a>
+@extends('themes/lte/layaout')
+@section('otrolink')
+@endsection
+@section('titulo')
+    <a href="{{ route('home') }}" class="btn btn-primary pull-right"><i class="fa fa-undo"></i> Regresar</a>
     <h3 class="text-center">Solicitud de retiro de dinero</h3>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('contenedor'); ?>
+@section('contenedor')
     <div class="flash-message">
-        <?php $__currentLoopData = ['danger', 'warning', 'success', 'info']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $msg): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <?php if(Session::has('alert-' . $msg)): ?>
-                <p class="alert alert-<?php echo e($msg); ?>"><?php echo e(Session::get('alert-' . $msg)); ?> <a href="#" class="close"
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if (Session::has('alert-' . $msg))
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close"
                         data-dismiss="alert" aria-label="close">&times;</a></p>
-            <?php endif; ?>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            @endif
+        @endforeach
     </div>
 
     <div class="row justify-content-center">
@@ -44,56 +45,52 @@
                 <div class="card-header">
                     <h3 class="card-title">Formulario de solicitud de retiro</h3>
                 </div>
-                <form role="form" method="POST" action="<?php echo e(route('monedero.solicitudretiro')); ?>">
-                    <?php echo csrf_field(); ?>
+                <form role="form" method="POST" action="{{ route('monedero.solicitudretiro') }}">
+                    @csrf
                     <div class="card-body col-sm-10">
                         <div class="form-group">
-                            <h4>Saldo Actual: $ <?php echo e(session('saldoCuenta')); ?></h4>
+                            <h4>Saldo Actual: $ {{ session('saldoCuenta') }}</h4>
                             <br>
                             <label for="cantidad">Datos de Cuenta Bancaria</label>
 
                             <div class="col-sm-10">
-                                <?php echo $errors->first('banco_benificiario', '<span class="help-block text-danger">:message</span>'); ?>
-
+                                {!! $errors->first('banco_benificiario', '<span class="help-block text-danger">:message</span>') !!}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-address-card"></i></span>
                                     </div>
                                     <input type="text" class="form-control" id="banco_benificiario"
-                                        name="banco_benificiario" value="<?php echo e(old('banco_benificiario')); ?>"
+                                        name="banco_benificiario" value="{{ old('banco_benificiario') }}"
                                         placeholder="Nombre de Banco" maxlength="100" required>
 
                                 </div>
                             </div>
                             <div class="col-sm-10">
-                                <?php echo $errors->first('tipo_cta', '<span class="help-block text-danger">:message</span>'); ?>
-
+                                {!! $errors->first('tipo_cta', '<span class="help-block text-danger">:message</span>') !!}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-address-card"></i></span>
                                     </div>
                                     <input type="text" class="form-control" id="tipo_cta" name="tipo_cta"
-                                        value="<?php echo e(old('tipo_cta')); ?>" placeholder="Tipo de Cuenta Bancaria" maxlength="100"
+                                        value="{{ old('tipo_cta') }}" placeholder="Tipo de Cuenta Bancaria" maxlength="100"
                                         required>
 
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <?php echo $errors->first('num_cta_bancaria', '<span class="help-block text-danger">:message</span>'); ?>
-
+                                {!! $errors->first('num_cta_bancaria', '<span class="help-block text-danger">:message</span>') !!}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-address-card"></i></span>
                                     </div>
                                     <input type="text" class="form-control" id="num_cta_bancaria" name="num_cta_bancaria"
-                                        value="<?php echo e(old('num_cta_bancaria')); ?>" placeholder="Número de Cuenta bancaria"
+                                        value="{{ old('num_cta_bancaria') }}" placeholder="Número de Cuenta bancaria"
                                         maxlength="100" required>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <label for="cantidad">Cantidad a retirar</label>
-                                <?php echo $errors->first('cantidad', '<span class="help-block text-danger">:message</span>'); ?>
-
+                                {!! $errors->first('cantidad', '<span class="help-block text-danger">:message</span>') !!}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-address-card"></i></span>
@@ -103,8 +100,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-5">
-                                <?php echo $errors->first('archivo', '<span class="help-block text-danger">:message</span>'); ?>
-
+                                {!! $errors->first('archivo', '<span class="help-block text-danger">:message</span>') !!}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-address-card"></i></span>
@@ -128,6 +124,4 @@
     </div>
     </div>
     </div>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('themes/lte/layaout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\teduprincipal - proyecto_pruebas\resources\views/monedero/retiro.blade.php ENDPATH**/ ?>
+@endsection

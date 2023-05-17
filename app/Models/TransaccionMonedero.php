@@ -13,6 +13,6 @@ class TransaccionMonedero extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id','user_id','tipo','fecha','valor','detalle','observacion','pedido_id','solicitud_id','pagosocio','pagadopor'
+        'id','user_id','dni','micodigo','tipo','fecha','valor','detalle','observacion','pedido_id','solicitud_id','pagosocio','pagadopor'
     ];
 }

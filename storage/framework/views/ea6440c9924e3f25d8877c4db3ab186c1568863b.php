@@ -39,6 +39,22 @@
             position: absolute;
             left: 20vw;
         }
+
+        .bar {
+            position: relative;
+            margin: 2rem 0;
+            border-top: 1px solid var(--dark);
+        }
+
+        .bar::before {
+            /* content: "ó"; */
+            position: absolute;
+            left: 50%;
+            /* transform: translate(-50%, -50%);
+                                padding: 0 1rem; */
+            /* background-color: #fff; */
+
+        }
     </style>
     <div class="container">
         <div class="row justify-content-center">
@@ -52,45 +68,12 @@
                     <div class="card-body">
                         <form method="POST" action="<?php echo e(route('register')); ?>">
                             <?php echo csrf_field(); ?>
-
-                            <div class="row mb-3">
-                                <label for="referente"
-                                    class="col-md-4 col-form-label text-md-end"><?php echo e(__('Código de Referido:')); ?></label>
-
-                                <div class="col-md-6">
-
-                                    <input id="referente"
-                                        type="text"placeholder="En caso de no tener referido dejar el campo vacío."
-                                        class="form-control <?php $__errorArgs = ['referente'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="referente"
-                                        value="<?php echo e(old('referente')); ?>" autocomplete="referente">
-
-                                    <?php $__errorArgs = ['referente'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong><?php echo e($messageReferencia); ?></strong>
-                                        </span>
-                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                </div>
-                            </div>
                             <div class="row mb-3">
                                 <label for="dni"
                                     class="col-md-4 col-form-label text-md-end"><?php echo e(__('DNI/Cédula:')); ?></label>
 
                                 <div class="col-md-6">
-                                    <input id="dni" type="text"placeholder="Solo coloque"
+                                    <input id="dni" type="text"
                                         class="form-control <?php $__errorArgs = ['dni'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -102,36 +85,6 @@ unset($__errorArgs, $__bag); ?>" name="dni"
                                         value="<?php echo e(old('dni')); ?>" required autocomplete="dni" autofocus>
 
                                     <?php $__errorArgs = ['dni'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong><?php echo e($message); ?></strong>
-                                        </span>
-                                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end"><?php echo e(__('Correo electrónico:')); ?></label>
-
-                                <div class="col-md-6">
-                                    
-                                    <input id="email" type="email"placeholder="Use el correo que use con frecuencia."
-                                        class="form-control <?php $__errorArgs = ['email'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="email"
-                                        value="<?php echo e(old('email')); ?>" required autocomplete="email">
-                                    <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -206,6 +159,39 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end"><?php echo e(__('Correo electrónico:')); ?></label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email"
+                                        class="form-control <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="email"
+                                        value="<?php echo e(old('email')); ?>" required
+                                        autocomplete="email"placeholder="Por favor registre un correo de uso frecuente.">
+
+                                    <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label for="celular"
                                     class="col-md-4 col-form-label text-md-end"><?php echo e(__('Celular:')); ?></label>
@@ -236,6 +222,39 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <label for="referente"
+                                    class="col-md-4 col-form-label text-md-end"><?php echo e(__('Código de Referido:')); ?></label>
+
+                                <div class="col-md-6">
+                                    <input id="referente" type="text"
+                                        class="form-control <?php $__errorArgs = ['referente'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="referente"
+                                        value="<?php echo e(old('referente')); ?>" autocomplete="referente"
+                                        placeholder="En caso de no tener referido dejar el campo vacío">
+
+                                    <?php $__errorArgs = ['referente'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-end"><?php echo e(__('Password:')); ?></label>
@@ -288,26 +307,28 @@ unset($__errorArgs, $__bag); ?>
                                         name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
-                            <div class="footer-top text-center">
-                                
-                                <a for="aceptatermino" href="https://teduemprende.com/HTML/ventana_modal_term_condic.html"
-                                    class="terminos">Terminos y condiciones
-                                    TEDÜ</a>
-                                <label class="form-check-label">
-                                    <input id="aceptatermino" type="checkbox" name="aceptatermino"
-                                        class="form-check-input" checked>
-                                </label>
-
-                            </div>
                             <br>
-                            <div class="row mb-0">
-                                <div class="d-grid gap-2 col-6 mx-auto">
-                                    <button type="submit" id="form-login"
-                                        class="btn btn-danger"><?php echo e(__('Register')); ?></button>
+                            
+                            <div class=" footer-top text-center">
+                                <a href="https://teduemprende.com/HTML/ventana_modal_term_condic.html"
+                                    class="terminos">Leer Terminos y condiciones</a>
+                                <br>
+                                <br>
+                                <label class="form-check-label">
+                                    <input type="checkbox" id="aceptatermino" name="aceptatermino"
+                                        class="form-check-input" checked>
 
+                                    <tr><?php echo e(__('Acepto')); ?>
+
+                                </label>
+                                <br>
+                                <br>
+                                <div class="row mb-0">
+                                    <div class="d-grid gap-2 col-6 mx-auto">
+                                        <button type="submit" id="form-login"
+                                            class="btn btn-danger"><?php echo e(__('Register')); ?></button>
+                                    </div>
                                 </div>
-                                
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -354,14 +375,11 @@ unset($__errorArgs, $__bag); ?>
         // When the user clicks on the password field, show the message box
         myInput.onfocus = function() {
             document.getElementById("message").style.display = "block";
-
         }
-
 
         // When the user clicks outside of the password field, hide the message box
         myInput.onblur = function() {
             document.getElementById("message").style.display = "none";
-
         }
 
         // When the user starts to type something inside the password field

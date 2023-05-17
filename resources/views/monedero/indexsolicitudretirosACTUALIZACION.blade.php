@@ -3,10 +3,14 @@
 @endsection
 @section('titulo')
     <a href="{{ route('home') }}" class="btn btn-primary pull-right"><i class="fa fa-undo"></i> Regresar</a>
-    Solicitudes de recargas por aprobar
+    Mis solicitudes de retiros
 @endsection
 
 @section('contenedor')
+    <div>
+        <a href="{{ route('monedero.retiro') }}" class="btn btn-success float-right"><i class="fas fa-plus-circle"></i>
+            Añadir</a>
+    </div>
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if (Session::has('alert-' . $msg))
@@ -18,45 +22,57 @@
     <table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
+                {{-- <th>No.</th>
+      <th>Fecha</th>
+      <th>Cantidad</th>
+      <th>Estado</th> --}}
                 <th>No.</th>
                 <th>Fecha</th>
-                <th>DNI</th>
-                <th>Codigo</th>
-                <th>Solicita</th>
-                <th>Detalle</th>
-                <th>Valor</th>
-                <th>Banco</th>
+                <th>Nombre de Banco y Tipo de Cuenta</th>
+                {{-- <th>Tipo de Cuenta</th> --}}
+                <th>Número de Cuenta </th>
+                <th>Cantidad</th>
                 <th>Estado</th>
                 <th>Archivo</th>
-                <th>Aprobar</th>
+                <th>Transacción EGR</th>
             </tr>
         </thead>
         <tbody>
+
+            {{-- @foreach ($datos as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->fecha }}</td>
+                    <td>{{ $item->detalle }}</td>
+                    <td>{{ $item->cantidad }}</td>
+                    @if ($item->transferido == 1)
+                        <td><span class='badge badge-success'>Aprobado</span></td>
+                    @else
+                        <td><span class='badge badge-warning'>Pendiente</span></td>
+                    @endif
+                    <td><a href="{{ url('archivo_banco/' . $item->rutaarchivo) }}" class="btn btn-warning pull-center"
+                            target="_blank"><i class="fa fa-download"></i> </a></td>
+                    <td>{{ $item->transaccionid }}</td>
+                </tr>
+            @endforeach --}}
 
             @foreach ($datos as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->fecha }}</td>
-                    <td>{{ $item->dni }}</td>
-                    <td>{{ $item->micodigo }}</td>
-                    <td>{{ $item->solicitante }}</td>
-                    <td>{{ $item->detalle }}</td>
-                    <td>{{ $item->valor }}</td>
-                    <td>{{ $item->bancoprocedencia }}</td>
+                    <td>{{ $item->banco_benificiario . ' ' . $item->tipo_cta }}</td>
+                    {{-- <td>{{ $item->banco_benificiario }}</td>
+                    <td>{{ $item->tipo_cta }}</td> --}}
+                    <td>{{ $item->num_cta_bancaria }}</td>
+                    <td>{{ $item->cantidad }}</td>
                     @if ($item->aprobado == 1)
                         <td><span class='badge badge-success'>Aprobado</span></td>
                     @else
                         <td><span class='badge badge-warning'>Pendiente</span></td>
                     @endif
-
                     <td><a href="{{ url('archivo_banco/' . $item->rutaarchivo) }}" class="btn btn-warning pull-center"
                             target="_blank"><i class="fa fa-download"></i> </a></td>
-                    @if ($item->aprobado == 1)
-                        <td></td>
-                    @else
-                        <td><a href="{{ url('recargas/aprobarsol/' . Crypt::encrypt($item->id)) }}"
-                                class="btn btn-info pull-center"><i class="fa fa-check-square"></i> </a></td>
-                    @endif
+                    <td>{{ $item->transaccionid }}</td>
                 </tr>
             @endforeach
 

@@ -114,7 +114,7 @@
 
     <div class="content">
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursoventas';">
                 <img src="<?php echo e(asset('/images/VENTAS-TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
@@ -122,12 +122,17 @@
 
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursoventas';">Ingresar</button>
+
+                </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$200</strong></em></h1>
                 </div>
             </div>
         </div>
 
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursoecommerce';">
                 <img src="<?php echo e(asset('/images/E-Commerce_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
@@ -135,11 +140,15 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursoecommerce';">Ingresar</button>
                 </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$180</strong></em></h1>
+                </div>
             </div>
         </div>
 
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursoemprendimiento';">
                 <img src="<?php echo e(asset('/images/EMPRENDIMIENTO_TEDU.jpg')); ?>" width="400px" height="250px"
                     alt="image1">
             </div>
@@ -148,11 +157,15 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursoemprendimiento';">Ingresar</button>
                 </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$90</strong></em></h1>
+                </div>
             </div>
         </div>
 
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursomarketing';">
                 <img src="<?php echo e(asset('/images/MARKETING_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
@@ -160,11 +173,15 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursomarketing';">Ingresar</button>
                 </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$300</strong></em></h1>
+                </div>
             </div>
         </div>
 
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursomindset';">
                 <img src="<?php echo e(asset('/images/MINDSET_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
@@ -172,10 +189,14 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursomindset';">Ingresar</button>
                 </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$80</strong></em></h1>
+                </div>
             </div>
         </div>
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursofinanzas';">
                 <img src="<?php echo e(asset('/images/Finanzas_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
@@ -183,11 +204,15 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursofinanzas';">Ingresar</button>
                 </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$150</strong></em></h1>
+                </div>
             </div>
         </div>
 
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursocoaching';">
                 <img src="<?php echo e(asset('/images/COACHING_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
@@ -195,10 +220,14 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursocoaching';">Ingresar</button>
                 </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$90</strong></em></h1>
+                </div>
             </div>
         </div>
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursoredesociales';">
                 <img src="<?php echo e(asset('/images/Redes Sociales_TEDU.jpg')); ?>" width="400px" height="250px"
                     alt="image1">
             </div>
@@ -206,6 +235,10 @@
                 <div class="main-container">
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursoredesociales';">Ingresar</button>
+                </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$100</strong></em></h1>
                 </div>
             </div>
         </div>
@@ -229,50 +262,26 @@
 
 <section class="academy" id="academy">
     <div class="content">
+        
 
         <div class="box">
-
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/REFERIDOS_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
-            </div>
-            <div class="text">
-                <div class="main-container">
-                    <button type="button" class="btn btn-danger"
-                        onclick="location.href='/public/listadocursos/cursoreferencias';">Ingresar</button>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-        <div class="box">
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/INMOBILIARIOS_TEDU.jpg')); ?>" width="400px" height="250px"
-                    alt="image1">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursoinmobiliarios';">
+                <img src="<?php echo e(asset('/images/AIRBNB_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
                 <div class="main-container">
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursoinmobiliarios';">Ingresar</button>
                 </div>
-            </div>
-        </div>
-        <div class="box">
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/MARKETPLACE_TEDU.jpg')); ?>" width="400px" height="250px"
-                    alt="image1">
-            </div>
-            <div class="text">
-                <div class="main-container">
-                    <button type="button" class="btn btn-danger"
-                        onclick="location.href='/public/listadocursos/cursomarketplace';">Ingresar</button>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$500</strong></em></h1>
                 </div>
             </div>
         </div>
+        
         <div class="box">
-            <div class="imgBx">
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursoseguros';">
                 <img src="<?php echo e(asset('/images/SEGUROS_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
             </div>
             <div class="text">
@@ -280,57 +289,16 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursoseguros';">Ingresar</button>
                 </div>
-            </div>
-        </div>
-        <div class="box">
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/CONTENIDOS_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
-            </div>
-            <div class="text">
-                <div class="main-container">
-                    <button type="button" class="btn btn-danger"
-                        onclick="location.href='/public/listadocursos/cursocontenidos';">Ingresar</button>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$190</strong></em></h1>
                 </div>
             </div>
         </div>
 
-
         <div class="box">
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/VIAJES_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
-            </div>
-            <div class="text">
-                <div class="main-container">
-                    <button type="button" class="btn btn-danger"
-                        onclick="location.href='/public/listadocursos/cursoviajes';">Ingresar</button>
-                </div>
-            </div>
-        </div>
-        <div class="box">
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/BLOCKCHAIN_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
-            </div>
-            <div class="text">
-                <div class="main-container">
-                    <button type="button" class="btn btn-danger"
-                        onclick="location.href='/public/listadocursos/cursoblockchain';">Ingresar</button>
-                </div>
-            </div>
-        </div>
-        <div class="box">
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/TRADING_TEDU.jpg')); ?>" width="400px" height="250px" alt="image1">
-            </div>
-            <div class="text">
-                <div class="main-container">
-                    <button type="button" class="btn btn-danger"
-                        onclick="location.href='/public/listadocursos/cursotrading';">Ingresar</button>
-                </div>
-            </div>
-        </div>
-        <div class="box">
-            <div class="imgBx">
-                <img src="<?php echo e(asset('/images/INTELIGENCIA ARTIFICIAL_TEDU.jpg')); ?>" width="400px" height="250px"
+            <div class="imgBx" onclick="location.href='/public/listadocursos/cursoia';">
+                <img src="<?php echo e(asset('/images/VENTAS_CON_IA_TEDU.jpg')); ?>" width="400px" height="250px"
                     alt="image1">
             </div>
             <div class="text">
@@ -338,8 +306,16 @@
                     <button type="button" class="btn btn-danger"
                         onclick="location.href='/public/listadocursos/cursoia';">Ingresar</button>
                 </div>
+                <br>
+                <div class="card-footer text-center-muted">
+                    <h1 class="display-6"><em><strong>Precio:$250</strong></em></h1>
+                </div>
             </div>
         </div>
+        
+
+        
+        
 
     </div>
 </section>

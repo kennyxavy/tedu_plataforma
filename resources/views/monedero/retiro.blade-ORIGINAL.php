@@ -52,61 +52,38 @@
                 <!-- /.card-header -->
                 <!-- form start -->
 
-                <form role="form" method="POST" action="{{ route('monedero.solicitudretiro') }}" accept-charset="UTF-8"
-                    enctype="multipart/form-data">
+                <form role="form" method="POST" action="{{ route('monedero.solicitudretiro') }}">
                     @csrf
                     <div class="card-body">
-                        <div>
-                            <h4>Saldo a la fecha: $ {{ session('saldoCuenta') }}</h4>
-                        </div>
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        {!! $errors->first('banco', '<span class="help-block text-danger">:message</span>') !!}
+                                    <div class="col-sm-3">
+                                        <label for="cantidad">Cantidad a retirar</label>
+                                        {!! $errors->first('cantidad', '<span class="help-block text-danger">:message</span>') !!}
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"></span>
+                                                <span class="input-group-text"><i class="far fa-address-card"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" id="banco" name="banco"
-                                                value="{{ old('banco') }}"placeholder="Banco procedencia" maxlength="100"
-                                                required>
+                                            <input type="text" class="form-control" id="cantidad" name="cantidad"
+                                                value="" placeholder="Cantidad a retirar">
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        {!! $errors->first('tipocta', '<span class="help-block text-danger">:message</span>') !!}
+                                    <div class="col-sm-3">
+                                        <label for="saldo">Saldo disponible</label>
+
+                                        {!! $errors->first('saldo', '<span class="help-block text-danger">:message</span>') !!}
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"></span>
+                                                <span class="input-group-text"><i class="far fa-address-card"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" id="tipocta" name="tipocta"
-                                                value="{{ old('tipocta') }}" placeholder="AHORRO/CORRIENTE" maxlength="100"
-                                                required>
+                                            <input type="text" class="form-control" id="saldo" name="saldo"
+                                                value={{ session('saldoCuenta') }} readonly>
+                                            {{-- <input type="text" class="form-control" id="saldo" name="saldo"
+                                                value={{ session('saldoCuenta') }} readonly> --}}
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
-                                        {!! $errors->first('numcuenta', '<span class="help-block text-danger">:message</span>') !!}
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"></span>
-                                            </div>
-                                            <input type="text" class="form-control" id="numcuenta" name="numcuenta"
-                                                value="{{ old('numcuenta') }}" placeholder="Número de cuenta"
-                                                maxlength="100" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        {!! $errors->first('valor', '<span class="help-block text-danger">:message</span>') !!}
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"></span>
-                                            </div>
-                                            <input type="text" class="form-control" id="valor" name="valor"
-                                                value="{{ old('valor') }}" placeholder="Ingrese valor" maxlength="100"
-                                                required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-10">
                                         {!! $errors->first('archivo', '<span class="help-block text-danger">:message</span>') !!}
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -115,17 +92,28 @@
                                             <input class="form-control" type="file" id="archivo" name="archivo"
                                                 required>
                                         </div>
-                                        <small>Por favor, adjuntar el documento o imagen del comprobante de transferencia o
-                                            deposito.</small>
+                                        <small>Por favor, adjuntar factura del usuario dueño de la cuenta</small>
+
                                     </div>
+
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                     <!-- /.card-body -->
+
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-block btn-danger"><i class="fas fa-save"></i>
-                            Generar Solicitud</button>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <button type="submit" class="btn btn-block btn-outline-primary"><i
+                                            class="fas fa-save"></i> Generar solicitud</button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
